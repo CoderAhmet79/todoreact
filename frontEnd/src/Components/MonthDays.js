@@ -7,11 +7,19 @@ import EditContainer from '../Utils/EditContainer';
 const MonthDays = ({ globalNum }) => {
 const [isDataLoaded, setIsDataLoaded] = useState(false);
 const [taskDays, setTaskDays] = useState([]);
-const [initialMonth, setInitialMonth] = useState('')
+const [dateInfo, setDateInfo] = useState()
+const [showEdit, setShowEdit] = useState(false)
+
 
 let activeMonthDays = [];
   
+const myDate= new Date(
+  new Date().getFullYear(),
+  new Date().getMonth() + 1+globalNum,
+  1
+)
 
+const initialMonth = myDate.getFullYear() + "-"+myDate.getMonth()
 const bringDays = (()=> {
   const initialMonthTotalDay = new Date(
     new Date().getFullYear(),
@@ -60,14 +68,19 @@ useEffect(()=> {
   fetchData();
 },[globalNum])
 
-function showEditContainer( day) {
-  
-  return (
-    <>            
-    <EditContainer dateInfo={day}/>    
-    </>
-  );
+const handleShow= ((item)=> setShowEdit(item))
+
+function showEditContainer(day) {
+  const sum= parseInt(day) + 1
+  const date1= initialMonth+'-'+day
+  const date2= initialMonth+'-'+ sum
+  const dateMain= {first:date1, last:date2}
+  setDateInfo(dateMain)
+  handleShow(true)
+  return   
 }
+
+
   return (
     <>
     {isDataLoaded ? (
@@ -86,6 +99,7 @@ function showEditContainer( day) {
     ) : (
       <p>Loading data...</p>
     )}
+    {showEdit && <EditContainer dateInfo={dateInfo} handleShow= {handleShow} /> }
   </>
   )
 }

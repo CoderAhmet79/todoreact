@@ -1,7 +1,6 @@
 
 import Header from "./Components/Header";
 import { useState } from "react";
-import EditContainer from "./Utils/EditContainer";
 import Container from "./Components/Container";
 
 
@@ -15,17 +14,17 @@ const fetchUsers = async () => {
 function App() {
   const [globalNum, setGlobalNum]=useState(0)
   const handleNum= ((num)=> setGlobalNum(prev=> prev+num) )
+  const [myDate, setMyDate] = useState('')
+ 
+  const setDate= ((date)=> setMyDate(date)) 
 
-  
   return (
     
     <div className="App">
-      <EditContainer/>
        <Header handleNum={handleNum} />
-       <Container globalNum={globalNum} />
- 
+       <Container globalNum={globalNum} setDate={setDate} />
     </div>
-      
+         
   );
 }
 

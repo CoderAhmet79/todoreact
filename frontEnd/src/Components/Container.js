@@ -2,7 +2,7 @@ import React from 'react'
 import InactivePrevDates from './InactivePrevDates'
 import MonthDays from './MonthDays'
 
-const Container = ({globalNum}) => {
+const Container = ({globalNum, setDate, editWindow}) => {
     
   return (
     <div  className="container">
@@ -28,7 +28,7 @@ const Container = ({globalNum}) => {
             SONTAG
         </div>
        <InactivePrevDates globalNum={globalNum}/> 
-       <MonthDays globalNum={globalNum}/>
+       <MonthDays globalNum={globalNum} setDate= {setDate}  />
     </div>
   )
 }
