@@ -3,6 +3,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const Todo = require('./models/schemas');
+const moment = require('moment');
 require('dotenv/config')
 
 const app = express()
@@ -11,6 +12,14 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+// Middleware to set the default timezone for the Express application
+app.use((req, res, next) => {
+  process.env.TZ = 'Europe/Vienna'; // Set the default timezone to Vienna
+  next();
+});
+
+
+
 
 const corsOptions = {
   origin: '*',
@@ -56,8 +65,8 @@ app.post("/getTodos", (req, res) => {
   
   Todo.find({
     taskDate: {
-      $gte: new Date(req.body.first),
-      $lte: new Date(req.body.last)
+      $gte: new Date(req.body.first).toISOString(),
+      $lte: new Date(req.body.last).toISOString()
     }
   })
     .then((todos) => res.json(todos))
@@ -91,11 +100,11 @@ app.put("/updateTodos/:id", (req, res) => {
 
 app.post("/newTodos", async (req, res) => {
   // Create a new client and connect to MongoDB
-
+ 
   const data = {
     task: req.body.task,
     isFinished: false,
-    taskDate: new Date(req.body.taskDate),
+    taskDate: new Date(req.body.taskDate).toISOString(),
     processTime: new Date(),
   };
 

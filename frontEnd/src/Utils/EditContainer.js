@@ -28,12 +28,11 @@ const EditContainer = ({ dateInfo, handleShow }) => {
    }
    
     try {
-      const response = await axios.post("http://localhost:4000/newTodos", datas);
+      await axios.post("http://localhost:4000/newTodos", datas);
       fetchDailyTasks()
     } catch (error) {
       console.error('Error fetching data:', error);
     }
-
 
   }
 
@@ -44,7 +43,7 @@ const EditContainer = ({ dateInfo, handleShow }) => {
   }
 
   const handleDelete = async (id) => {
-    if (window.confirm('Do you really want to delete this task') == true) {
+    if (window.confirm('Do you really want to delete this task') === true) {
       await axios.delete("http://localhost:4000/deleteTodos/" + id, id)
         .then(response => { if (response.data.acknowledged === true) fetchDailyTasks() })
         .catch(error => alert(error.message))
