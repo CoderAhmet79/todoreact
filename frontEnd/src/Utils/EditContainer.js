@@ -10,6 +10,10 @@ const EditContainer = ({ dateInfo, handleShow }) => {
   const queryDate = dateInfo
 
   const handleAddTask= async () => {
+    if(new Date() > new Date(queryDate.first)) {
+      alert("You can not add task for past date")
+      return
+    }
    if(hourRef.current && hourRef.current.value === '') {
     alert("Hour info can not be empty/missing")
     hourRef.current.focus()
@@ -87,7 +91,7 @@ const EditContainer = ({ dateInfo, handleShow }) => {
               <div>Task time</div>
               <div>Task to do</div>
               <div>
-               Click to toggle Finished/ Not Completed
+               Click to finished state
               </div>
               <div>Click to delete the task</div>
             </li>
@@ -99,7 +103,7 @@ const EditContainer = ({ dateInfo, handleShow }) => {
               <div>
                 <img src={task.isFinished ? "img/finished.png" : "img/notComplete.png"}
                   title={task.isFinished ? "Completed" : "Not Completed"}
-                  onClick={task.isFinished ? (() => alert("You can't change old tasks")) : () => handleToComplete(task._id)}
+                  onClick={task.isFinished ? (() => alert("You can't change finished tasks")) : () => handleToComplete(task._id)}
                 />
               </div>
               <div><img src="img/delete.png" title='Delete' onClick={() => handleDelete(task._id)} /></div>

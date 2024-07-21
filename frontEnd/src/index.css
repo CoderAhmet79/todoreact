@@ -221,6 +221,10 @@ align-items: center;
   margin-left: 2px;
 }
 
+.taskList div img:hover{
+  filter: drop-shadow(5px 0px 10px rgb(30, 30, 37));
+}
+
 .taskList div:first-child {
   width: 8%;
 }

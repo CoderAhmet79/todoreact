@@ -3,7 +3,6 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const Todo = require('./models/schemas');
-const moment = require('moment');
 require('dotenv/config')
 
 const app = express()
