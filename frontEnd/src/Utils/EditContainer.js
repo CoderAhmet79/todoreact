@@ -6,7 +6,6 @@ const EditContainer = ({ dateInfo, handleShow }) => {
   const hourRef = useRef()
 
   const [fetchedTasks, setFetchedTasks] = useState([])
-  const [updated, setUpdated] = useState(true)
   const queryDate = dateInfo
 
   const handleAddTask= async () => {

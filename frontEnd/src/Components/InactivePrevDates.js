@@ -36,7 +36,7 @@ const prevMonthTotalDay = new Date(
 
   return (
     <>
-    
+    {/* Mapping inactive date cells */}
     {inActiveDaysArr.map(item => 
        <div className="unitCell">
             <div className="numberExpire">{item } </div>

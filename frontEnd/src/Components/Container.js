@@ -6,6 +6,7 @@ const Container = ({globalNum, setDate, editWindow}) => {
     
   return (
     <div  className="container">
+          {/* Each day of the week is represented as a cell */}
       <div className="dayCell">
             MONTAG
         </div>
@@ -27,7 +28,9 @@ const Container = ({globalNum, setDate, editWindow}) => {
         <div className="dayCell">
             SONTAG
         </div>
+        {/* Component to display inactive previous dates */}
        <InactivePrevDates globalNum={globalNum}/> 
+         {/* Component to display the days of the current month */}
        <MonthDays globalNum={globalNum} setDate= {setDate}  />
     </div>
   )
